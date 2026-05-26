@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <!-- ============================================================
+       EL BORREGO VIUDO · Sitio Oficial · Moscú / San Petersburgo
+       Diseño: Dark Mode Gastronómico · Versión 1.0 · Producción
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Borrego Viudo — Tacos de la CDMX en Rusia | Москва · Санкт-Петербург</title>
+  <meta name="description" content="La taquería más auténtica de México llega a Rusia. Tacos al pastor, suadero, lengua y tepache en el corazón de Moscú y San Petersburgo.">
+  <meta property="og:title" content="El Borrego Viudo · Tacos en Moscú">
+  <meta property="og:description" content="Sabores de la Ciudad de México, ahora en el corazón de Rusia.">
+
+  <!-- Google Fonts: Bebas Neue (Display) + DM Serif Display (Elegance) + Caveat (Handwritten) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Caveat:wght@400;700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'fuego':    '#E8701A',
+            'brasa':    '#C41E3A',
+            'oro':      '#D4AF37',
+            'crema':    '#F5E6D3',
+            'carbon':   '#0A0804',
+            'humo':     '#1A1510',
+            'ceniza':   '#2A2018',
+            'barro':    '#8B7355',
+          },
+          fontFamily: {
+            'bebas':  ['Bebas Neue', 'sans-serif'],
+            'serif':  ['DM Serif Display', 'serif'],
+            'hand':   ['Caveat', 'cursive'],
+            'body':   ['Manrope', 'sans-serif'],
+          },
+          animation: {
+            'flicker':    'flicker 3s infinite',
+            'float':      'float 6s ease-in-out infinite',
+            'slide-up':   'slideUp 0.8s ease forwards',
+            'fade-in':    'fadeIn 1s ease forwards',
+          },
+          keyframes: {
+            flicker: {
+              '0%, 100%': { opacity: '1' },
+              '50%':       { opacity: '0.85' },
+              '75%':       { opacity: '0.95' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%':       { transform: 'translateY(-12px)' },
+            },
+            slideUp: {
+              from: { opacity: '0', transform: 'translateY(40px)' },
+              to:   { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              from: { opacity: '0' },
+              to:   { opacity: '1' },
+            },
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Variables Globales ─────────────────────────────────── */
+    :root {
+      --fuego:  #E8701A;
+      --brasa:  #C41E3A;
+      --oro:    #D4AF37;
+      --crema:  #F5E6D3;
+      --carbon: #0A0804;
+      --humo:   #1A1510;
+      --barro:  #8B7355;
+    }
+
+    /* ── Reset & Base ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--carbon);
+      color: var(--crema);
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ── Grain Overlay ──────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.6;
+    }
+
+    /* ── Custom Scrollbar ───────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--carbon); }
+    ::-webkit-scrollbar-thumb { background: var(--fuego); border-radius: 2px; }
+
+    /* ── Selection ──────────────────────────────────────────── */
+    ::selection { background: var(--fuego); color: var(--carbon); }
+
+    /* ── Navigation ─────────────────────────────────────────── */
+    #navbar {
+      transition: all 0.4s ease;
+      background: transparent;
+    }
+    #navbar.scrolled {
+      background: rgba(10, 8, 4, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232, 112, 26, 0.2);
+    }
+    .nav-link {
+      position: relative;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--crema);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--fuego);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover { color: var(--fuego); }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 80%, rgba(232,112,26,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 20% 50%, rgba(196,30,58,0.12) 0%, transparent 60%),
+        linear-gradient(to bottom, #0A0804 0%, #120C06 60%, #0A0804 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .hero-glow-1 {
+      width: 400px; height: 400px;
+      background: rgba(232, 112, 26, 0.15);
+      bottom: 5%; left: 50%;
+      transform: translateX(-50%);
+    }
+    .hero-glow-2 {
+      width: 200px; height: 200px;
+      background: rgba(196, 30, 58, 0.1);
+      bottom: 20%; left: 20%;
+      animation-delay: -3s;
+    }
+
+    /* ── Línea decorativa ───────────────────────────────────── */
+    .deco-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .deco-line::before,
+    .deco-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--oro), transparent);
+    }
+
+    /* ── Section Titles ─────────────────────────────────────── */
+    .section-tag {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--fuego);
+    }
+
+    /* ── Cards ──────────────────────────────────────────────── */
+    .menu-card {
+      background: linear-gradient(135deg, rgba(42,32,24,0.9) 0%, rgba(26,21,16,0.95) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 2px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: linear-gradient(to bottom, var(--fuego), var(--brasa));
+      transition: height 0.4s ease;
+    }
+    .menu-card:hover { transform: translateY(-4px); border-color: rgba(212, 175, 55, 0.35); }
+    .menu-card:hover::before { height: 100%; }
+
+    /* ── Picantómetro ───────────────────────────────────────── */
+    .picanto-btn {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(232,112,26,0.3);
+      background: rgba(26,21,16,0.8);
+    }
+    .picanto-btn.active-0 { background: rgba(139,115,85,0.3); border-color: var(--barro); }
+    .picanto-btn.active-1 { background: rgba(212,175,55,0.2); border-color: var(--oro); }
+    .picanto-btn.active-2 { background: rgba(232,112,26,0.3); border-color: var(--fuego); }
+    .picanto-btn.active-3 { background: rgba(196,30,58,0.35); border-color: var(--brasa); box-shadow: 0 0 20px rgba(196,30,58,0.3); }
+
+    .chile-fill path { transition: fill 0.4s ease; }
+
+    /* ── Pasos del Taco ─────────────────────────────────────── */
+    .taco-step {
+      transition: all 0.4s ease;
+      opacity: 0.5;
+      transform: scale(0.97);
+    }
+    .taco-step.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .step-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      line-height: 1;
+      color: rgba(232,112,26,0.12);
+      position: absolute;
+      top: -1rem;
+      right: 1rem;
+    }
+
+    /* ── Horario Table ──────────────────────────────────────── */
+    .horario-row {
+      border-bottom: 1px solid rgba(139,115,85,0.15);
+      transition: background 0.2s;
+    }
+    .horario-row:hover { background: rgba(232,112,26,0.05); }
+    .horario-row:last-child { border-bottom: none; }
+
+    /* ── Franquicias ────────────────────────────────────────── */
+    .invest-card {
+      background: linear-gradient(135deg, rgba(42,32,24,0.6) 0%, rgba(26,21,16,0.8) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 2px;
+      transition: all 0.4s;
+    }
+    .invest-card:hover {
+      border-color: var(--oro);
+      background: linear-gradient(135deg, rgba(42,32,24,0.9) 0%, rgba(26,21,16,0.95) 100%);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.1);
+    }
+
+    /* ── CTA Button ─────────────────────────────────────────── */
+    .btn-fuego {
+      display: inline-block;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--carbon);
+      background: linear-gradient(135deg, var(--fuego) 0%, #F08030 100%);
+      padding: 0.9rem 2.5rem;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-fuego::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--brasa) 0%, #E03050 100%);
+      transition: left 0.4s ease;
+    }
+    .btn-fuego:hover::before { left: 0; }
+    .btn-fuego span { position: relative; z-index: 1; }
+
+    .btn-outline {
+      display: inline-block;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--oro);
+      background: transparent;
+      padding: 0.9rem 2.5rem;
+      border: 1px solid var(--oro);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      background: var(--oro);
+      color: var(--carbon);
+    }
+
+    /* ── Reveal Animation ───────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Divider ────────────────────────────────────────────── */
+    .oro-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, var(--fuego), var(--oro));
+    }
+
+    /* ── Mobile Menu ────────────────────────────────────────── */
+    #mobile-menu {
+      background: rgba(10,8,4,0.98);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(232,112,26,0.2);
+    }
+
+    /* ── Tepache Visual ─────────────────────────────────────── */
+    .tepache-badge {
+      background: linear-gradient(135deg, rgba(232,112,26,0.15), rgba(212,175,55,0.1));
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 2px;
+      font-family: 'Caveat', cursive;
+    }
+
+    /* ── Locations ──────────────────────────────────────────── */
+    .location-card {
+      background: linear-gradient(135deg, rgba(42,32,24,0.7), rgba(26,21,16,0.9));
+      border: 1px solid rgba(232,112,26,0.2);
+      border-radius: 2px;
+      transition: all 0.4s;
+    }
+    .location-card:hover {
+      border-color: var(--fuego);
+      box-shadow: 0 10px 40px rgba(232,112,26,0.1);
+    }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: linear-gradient(to bottom, var(--humo), #050302);
+      border-top: 1px solid rgba(232,112,26,0.15);
+    }
+
+    /* ── Responsive Fixes ───────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero-bebas { font-size: 4.5rem; }
+    }
+
+    /* ── Stars decoration ───────────────────────────────────── */
+    .star-field {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: rgba(245,230,211,0.4);
+      border-radius: 50%;
+      animation: twinkle var(--d, 4s) var(--del, 0s) ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.1; }
+      to   { opacity: 0.8; }
+    }
+
+    /* ── Accordion ──────────────────────────────────────────── */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .accordion-content.open { max-height: 200px; }
+    .accordion-arrow { transition: transform 0.3s ease; }
+    .accordion-arrow.open { transform: rotate(180deg); }
+  </style>
+</head>
+
+<body class="font-body bg-carbon text-crema">
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+      <!-- Logotipo -->
+      <a href="#hero" class="flex flex-col leading-none group">
+        <span class="font-bebas text-2xl tracking-widest text-crema group-hover:text-fuego transition-colors">
+          El Borrego Viudo
+        </span>
+        <span class="font-hand text-xs text-barro tracking-wide" style="font-size:0.7rem;">
+          Tacos · Москва &amp; Санкт-Петербург
+        </span>
+      </a>
+
+      <!-- Links Desktop -->
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#menu"        class="nav-link">Menú / Меню</a>
+        <a href="#como-comer"  class="nav-link">¿Cómo comer?</a>
+        <a href="#experiencia" class="nav-link">Experiencia</a>
+        <a href="#ubicacion"   class="nav-link">Ubicación</a>
+        <a href="#franquicias" class="nav-link">Inversión</a>
+      </div>
+
+      <!-- CTA Desktop -->
+      <a href="#ubicacion" class="hidden lg:inline-block btn-fuego text-xs">
+        <span>Reservar Mesa</span>
+      </a>
+
+      <!-- Hamburger Mobile -->
+      <button id="menu-toggle" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menú">
+        <span id="bar1" class="block w-6 h-0.5 bg-crema transition-all duration-300"></span>
+        <span id="bar2" class="block w-6 h-0.5 bg-crema transition-all duration-300"></span>
+        <span id="bar3" class="block w-4 h-0.5 bg-fuego transition-all duration-300"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden mt-4 px-4 py-6 space-y-4">
+      <a href="#menu"        onclick="closeMobileMenu()" class="block nav-link py-2">Menú / Меню</a>
+      <a href="#como-comer"  onclick="closeMobileMenu()" class="block nav-link py-2">¿Cómo comer un taco?</a>
+      <a href="#experiencia" onclick="closeMobileMenu()" class="block nav-link py-2">La Experiencia Nocturna</a>
+      <a href="#ubicacion"   onclick="closeMobileMenu()" class="block nav-link py-2">Ubicación / Horarios</a>
+      <a href="#franquicias" onclick="closeMobileMenu()" class="block nav-link py-2">Franquicias e Inversión</a>
+      <a href="#ubicacion"   onclick="closeMobileMenu()" class="btn-fuego inline-block mt-2">
+        <span>Reservar Mesa</span>
+      </a>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero" class="relative">
+
+    <!-- Estrellas decorativas -->
+    <div class="star-field" id="star-field" aria-hidden="true"></div>
+
+    <!-- Glows de calor -->
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+
+    <!-- Contenido -->
+    <div class="relative z-10 text-center px-6 py-32 md:py-0">
+
+      <!-- Etiqueta superior -->
+      <div class="deco-line mb-8 max-w-xs mx-auto">
+        <span class="section-tag whitespace-nowrap">Bienvenidos · Добро пожаловать</span>
+      </div>
+
+      <!-- Título principal -->
+      <h1 class="font-bebas hero-bebas leading-none tracking-wider mb-4"
+          style="font-size: clamp(4rem, 14vw, 11rem); color: var(--crema);">
+        EL BORREGO<br>
+        <span style="color: var(--fuego); text-shadow: 0 0 60px rgba(232,112,26,0.4);">VIUDO</span>
+      </h1>
+
+      <!-- Subtítulo bilingüe -->
+      <p class="font-serif italic text-barro text-lg md:text-2xl mb-2 tracking-wide">
+        La Ciudad de México llega al corazón de Rusia
+      </p>
+      <p class="font-hand text-oro text-xl md:text-2xl mb-12 animate-flicker"
+         style="letter-spacing:0.05em;">
+        Мексика в твоём городе — Москва &amp; Санкт-Петербург
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="#menu" class="btn-fuego"><span>🌮 Ver el Menú</span></a>
+        <a href="#como-comer" class="btn-outline">¿Cómo se come un taco?</a>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+        <span class="font-body text-xs tracking-widest uppercase text-barro">Scroll</span>
+        <div class="w-px h-12 bg-gradient-to-b from-fuego to-transparent animate-pulse"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       HISTORIA / TROPICALIZACIÓN
+  ============================================================ -->
+  <section id="historia" class="py-28 px-6 md:px-12 relative overflow-hidden">
+
+    <!-- Número decorativo de fondo -->
+    <span class="absolute right-0 top-1/2 -translate-y-1/2 font-bebas text-[20rem] leading-none
+                 text-crema opacity-[0.02] select-none pointer-events-none">01</span>
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+
+      <!-- Texto -->
+      <div class="reveal">
+        <p class="section-tag mb-4">Nuestra Historia · Наша История</p>
+        <h2 class="font-bebas text-5xl md:text-7xl leading-none text-crema mb-6">
+          Del Eje Central<br>
+          <span class="text-fuego">al Río Moscova</span>
+        </h2>
+        <div class="oro-divider mb-8"></div>
+        <p class="text-barro leading-relaxed mb-6">
+          Nació de madrugada bajo los flúores de una taquería de barrio en la Colonia Doctores. Un borrego que perdió a su dueña, pero nunca el sabor. Hoy, ese mismo amor al asador cruza fronteras y aterriza en el corazón de Rusia, traducido con respeto, sin perder el alma.
+        </p>
+        <p class="font-hand text-oro text-lg leading-relaxed mb-8">
+          "Ночная уличная еда — это не просто еда. Это ритуал. Это сообщество. Это жизнь."<br>
+          <span class="text-barro text-base">"La comida callejera nocturna no es solo comida. Es ritual. Es comunidad. Es vida."</span>
+        </p>
+        <div class="flex gap-8">
+          <div>
+            <p class="font-bebas text-4xl text-fuego">1987</p>
+            <p class="text-xs tracking-widest uppercase text-barro">Año de fundación · CDMX</p>
+          </div>
+          <div class="w-px bg-ceniza"></div>
+          <div>
+            <p class="font-bebas text-4xl text-fuego">2025</p>
+            <p class="text-xs tracking-widest uppercase text-barro">Llegada a Rusia</p>
+          </div>
+          <div class="w-px bg-ceniza"></div>
+          <div>
+            <p class="font-bebas text-4xl text-fuego">2</p>
+            <p class="text-xs tracking-widest uppercase text-barro">Ciudades · Города</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual decorativo -->
+      <div class="reveal reveal-delay-2 relative">
+        <!-- Marco decorativo -->
+        <div class="relative p-8 border border-oro border-opacity-20"
+             style="background: linear-gradient(135deg, rgba(42,32,24,0.8), rgba(26,21,16,0.95));">
+          <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-fuego -translate-x-2 -translate-y-2"></div>
+          <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-fuego translate-x-2 translate-y-2"></div>
+
+          <p class="font-hand text-crema text-2xl mb-4 leading-relaxed">
+            La tropicalización no es traición.
+            <span class="text-fuego">Es amor con contexto.</span>
+          </p>
+          <p class="font-hand text-oro text-xl leading-relaxed">
+            Адаптация — это не измена.
+            <span class="text-crema"> Это уважение к вам.</span>
+          </p>
+
+          <div class="mt-8 pt-6 border-t border-ceniza grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div class="text-3xl mb-2">🌮</div>
+              <p class="text-xs text-barro uppercase tracking-widest">Auténtico</p>
+            </div>
+            <div>
+              <div class="text-3xl mb-2">🍂</div>
+              <p class="text-xs text-barro uppercase tracking-widest">Adaptado</p>
+            </div>
+            <div>
+              <div class="text-3xl mb-2">❤️</div>
+              <p class="text-xs text-barro uppercase tracking-widest">Con Alma</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CÓMO COMER UN TACO (Guía Visual Interactiva)
+  ============================================================ -->
+  <section id="como-comer" class="py-28 relative overflow-hidden"
+           style="background: linear-gradient(to bottom, #0A0804, #120C06, #0A0804);">
+
+    <div class="px-6 md:px-12 max-w-7xl mx-auto">
+
+      <!-- Encabezado -->
+      <div class="text-center mb-16 reveal">
+        <p class="section-tag mb-3">Guía Especial · Специальное Руководство</p>
+        <h2 class="font-bebas text-5xl md:text-7xl text-crema leading-none mb-4">
+          ¿Cómo se come<br>
+          <span class="text-fuego">un Taco?</span>
+        </h2>
+        <p class="font-hand text-oro text-xl">Как есть тако? — La guía oficial para el comensal ruso</p>
+        <div class="oro-divider mx-auto mt-6"></div>
+      </div>
+
+      <!-- Pasos interactivos -->
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+
+        <!-- Selector de pasos -->
+        <div class="space-y-4" id="step-selector">
+
+          <!-- Paso 1 -->
+          <div class="taco-step active rounded-sm p-5 border border-ceniza cursor-pointer
+                      bg-gradient-to-r from-ceniza to-humo relative"
+               data-step="1" onclick="selectStep(1)">
+            <span class="step-number">01</span>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-fuego bg-opacity-20 border border-fuego
+                          border-opacity-50 flex items-center justify-center flex-shrink-0 text-xl">
+                🤲
+              </div>
+              <div>
+                <h3 class="font-bebas text-xl text-crema mb-1 tracking-wide">
+                  Toma el taco con ambas manos
+                </h3>
+                <p class="text-barro text-sm leading-relaxed">
+                  No uses cubiertos. El taco se come con las manos, sosteniéndolo como un pequeño libro abierto. ¡Es parte de la experiencia!
+                </p>
+                <p class="font-hand text-oro text-base mt-1">Возьми тако двумя руками — это правило уличной еды.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="taco-step rounded-sm p-5 border border-ceniza cursor-pointer
+                      bg-gradient-to-r from-ceniza to-humo relative"
+               data-step="2" onclick="selectStep(2)">
+            <span class="step-number">02</span>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-fuego bg-opacity-20 border border-fuego
+                          border-opacity-50 flex items-center justify-center flex-shrink-0 text-xl">
+                🌶️
+              </div>
+              <div>
+                <h3 class="font-bebas text-xl text-crema mb-1 tracking-wide">
+                  Añade tu salsa (ve abajo al Picantómetro)
+                </h3>
+                <p class="text-barro text-sm leading-relaxed">
+                  Elige tu nivel de picante en la barra de salsas. Para principiantes: salsa verde suave o tomatillo. Nuestro personal te guiará.
+                </p>
+                <p class="font-hand text-oro text-base mt-1">Выбери свой соус — начни с зелёного, он мягкий!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="taco-step rounded-sm p-5 border border-ceniza cursor-pointer
+                      bg-gradient-to-r from-ceniza to-humo relative"
+               data-step="3" onclick="selectStep(3)">
+            <span class="step-number">03</span>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-fuego bg-opacity-20 border border-fuego
+                          border-opacity-50 flex items-center justify-center flex-shrink-0 text-xl">
+                🧅
+              </div>
+              <div>
+                <h3 class="font-bebas text-xl text-crema mb-1 tracking-wide">
+                  Cilantro y cebollita: el toque final
+                </h3>
+                <p class="text-barro text-sm leading-relaxed">
+                  Una cucharadita de cebolla picada y cilantro fresco. Son los ingredientes más tradicionales del taco auténtico. No los omitas.
+                </p>
+                <p class="font-hand text-oro text-base mt-1">Кинза и лук — маленький, но важный штрих к тако.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 4 -->
+          <div class="taco-step rounded-sm p-5 border border-ceniza cursor-pointer
+                      bg-gradient-to-r from-ceniza to-humo relative"
+               data-step="4" onclick="selectStep(4)">
+            <span class="step-number">04</span>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-fuego bg-opacity-20 border border-fuego
+                          border-opacity-50 flex items-center justify-center flex-shrink-0 text-xl">
+                😋
+              </div>
+              <div>
+                <h3 class="font-bebas text-xl text-crema mb-1 tracking-wide">
+                  ¡Inclínate y muerde sin miedo!
+                </h3>
+                <p class="text-barro text-sm leading-relaxed">
+                  Inclina el taco hacia tu boca. Es normal si cae un poco — ¡para eso existe el papel! El primer mordisco es el más importante.
+                </p>
+                <p class="font-hand text-oro text-base mt-1">Наклонись и кусай! Это нормально — немного упадёт. Ешь смело!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 5 -->
+          <div class="taco-step rounded-sm p-5 border border-ceniza cursor-pointer
+                      bg-gradient-to-r from-ceniza to-humo relative"
+               data-step="5" onclick="selectStep(5)">
+            <span class="step-number">05</span>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-oro bg-opacity-20 border border-oro
+                          border-opacity-50 flex items-center justify-center flex-shrink-0 text-xl">
+                🍺
+              </div>
+              <div>
+                <h3 class="font-bebas text-xl text-crema mb-1 tracking-wide">
+                  Acompaña con Tepache o agua fresca
+                </h3>
+                <p class="text-barro text-sm leading-relaxed">
+                  El tepache es nuestra bebida de piña fermentada, como el kvass mexicano. Frío, ligeramente dulce y el mejor maridaje para el taco.
+                </p>
+                <p class="font-hand text-oro text-base mt-1">Тепаче — это мексиканский квас из ананаса. Освежающий и идеальный!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualización del paso activo -->
+        <div class="sticky top-24" id="step-visual">
+          <div class="p-8 border border-ceniza bg-humo relative min-h-80 flex flex-col items-center justify-center text-center"
+               style="background: linear-gradient(135deg, rgba(42,32,24,0.7), rgba(26,21,16,0.95));">
+            <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-fuego"></div>
+            <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-fuego"></div>
+
+            <div id="step-icon" class="text-8xl mb-6 transition-all duration-500">🤲</div>
+            <h3 id="step-title" class="font-bebas text-3xl text-crema mb-3">Toma el taco con ambas manos</h3>
+            <p id="step-desc" class="text-barro text-sm leading-relaxed max-w-xs">
+              Sostén la tortilla como un pequeño libro abierto. ¡Sin cubiertos, siempre!
+            </p>
+            <div id="step-counter" class="mt-8 font-bebas text-6xl text-fuego opacity-20">01 / 05</div>
+          </div>
+
+          <!-- Nota cultural -->
+          <div class="mt-4 p-4 border border-oro border-opacity-20 bg-ceniza bg-opacity-50">
+            <p class="text-xs text-barro leading-relaxed">
+              <span class="text-oro font-semibold">Nota cultural:</span>
+              En México, comer tacos en la calle es una experiencia social y nocturna. 
+              Los tacos se piden de pie, en grupos, y se acompañan de conversación. 
+              <span class="font-hand text-oro">Добро пожаловать в это ритуальное застолье.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       MENÚ ADAPTADO
+  ============================================================ -->
+  <section id="menu" class="py-28 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Encabezado -->
+      <div class="text-center mb-16 reveal">
+        <p class="section-tag mb-3">Menú Tropicalizado · Адаптированное Меню</p>
+        <h2 class="font-bebas text-5xl md:text-7xl text-crema leading-none mb-4">
+          Nuestros<br>
+          <span class="text-fuego">Tacos Estrella</span>
+        </h2>
+        <p class="text-barro max-w-xl mx-auto leading-relaxed">
+          Cada receta es auténtica en esencia, tropicalizada en intensidad. Ingredientes importados de México, preparaciones ajustadas para el paladar ruso. Sin compromiso de sabor.
+        </p>
+        <div class="oro-divider mx-auto mt-6"></div>
+      </div>
+
+      <!-- Grid de tacos -->
+      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mb-16">
+
+        <!-- Taco 1: Al Pastor -->
+        <div class="menu-card p-6 reveal">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span class="text-xs tracking-widest uppercase text-fuego">Especialidad · Фирменное</span>
+              <h3 class="font-bebas text-3xl text-crema mt-1">Orden de tacos al Pastor (4 tacos)</h3>
+              <p class="font-hand text-oro text-lg">Пастор</p>
+            </div>
+            <span class="text-4xl">🌮</span>
+          </div>
+          <p class="text-barro text-sm leading-relaxed mb-4">
+            Cerdo marinado en achiote y especias durante 24h, con piña asada al fuego. 
+            <strong class="text-crema">Versión Rusia:</strong> marinado más suave, sin exceso de ácido. Servido en tortilla de maíz azul.
+          </p>
+          <p class="font-hand text-barro text-sm italic">
+            Свинина, маринованная в ачиоте с ананасом. Нежный и сбалансированный.
+          </p>
+          <div class="mt-4 pt-4 border-t border-ceniza flex items-center justify-between">
+            <div class="flex gap-1">
+              <span class="text-xs bg-fuego bg-opacity-20 text-fuego px-2 py-0.5 border border-fuego border-opacity-30">Cerdo</span>
+              <span class="text-xs bg-oro bg-opacity-10 text-oro px-2 py-0.5 border border-oro border-opacity-30">Piña</span>
+            </div>
+            <span class="font-bebas text-2xl text-crema">590 ₽</span>
+          </div>
+          <!-- Picante indicador -->
+          <div class="mt-3 flex items-center gap-2">
+            <span class="text-xs text-barro">Picante:</span>
+            <div class="flex gap-1">
+              <div class="w-3 h-3 rounded-full bg-fuego"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+            </div>
+            <span class="text-xs text-barro">Suave</span>
+          </div>
+        </div>
+
+        <!-- Taco 2: Suadero -->
+        <div class="menu-card p-6 reveal reveal-delay-1">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span class="text-xs tracking-widest uppercase text-fuego">Clásico · Классика</span>
+              <h3 class="font-bebas text-3xl text-crema mt-1">Orden de tacos de Suadero (4 tacos)</h3>
+              <p class="font-hand text-oro text-lg">Суадеро · Estofado de Res</p>
+            </div>
+            <span class="text-4xl">🥩</span>
+          </div>
+          <p class="text-barro text-sm leading-relaxed mb-4">
+            Pecho de ternera cocido a fuego lento durante 4 horas en su propia grasa. Textura sedosa y sabor profundo. 
+            <strong class="text-crema">Para Rusia:</strong> estilo estofado, con hierbas de olor familiares: laurel, pimienta negra y tomillo.
+          </p>
+          <p class="font-hand text-barro text-sm italic">
+            Тушёная говяжья грудинка — мягкая, сочная, с травами. Идеально для новичков.
+          </p>
+          <div class="mt-4 pt-4 border-t border-ceniza flex items-center justify-between">
+            <div class="flex gap-1">
+              <span class="text-xs bg-fuego bg-opacity-20 text-fuego px-2 py-0.5 border border-fuego border-opacity-30">Res</span>
+              <span class="text-xs bg-oro bg-opacity-10 text-oro px-2 py-0.5 border border-oro border-opacity-30">Estofado</span>
+            </div>
+            <span class="font-bebas text-2xl text-crema">620 ₽</span>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <span class="text-xs text-barro">Picante:</span>
+            <div class="flex gap-1">
+              <div class="w-3 h-3 rounded-full bg-barro opacity-60"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+            </div>
+            <span class="text-xs text-barro">Sin picante</span>
+          </div>
+        </div>
+
+        <!-- Taco 3: Lengua -->
+        <div class="menu-card p-6 reveal reveal-delay-2">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span class="text-xs tracking-widest uppercase text-oro">Premium · Премиум</span>
+              <h3 class="font-bebas text-3xl text-crema mt-1">Orden de tacos de Lengua (4 tacos)</h3>
+              <p class="font-hand text-oro text-lg">Говяжий Язык</p>
+            </div>
+            <span class="text-4xl">👅</span>
+          </div>
+          <p class="text-barro text-sm leading-relaxed mb-4">
+            Lengua de res cocida lentamente en caldo aromático, cortada en cubos y dorada en comal. 
+            <strong class="text-crema">Para Rusia:</strong> familiar en textura (semejante al «язык» ruso en gelatina), pero con el alma mexicana.
+          </p>
+          <p class="font-hand text-barro text-sm italic">
+            Говяжий язык — знакомый продукт для русских! Только в мексиканском стиле 🌮
+          </p>
+          <div class="mt-4 pt-4 border-t border-ceniza flex items-center justify-between">
+            <div class="flex gap-1">
+              <span class="text-xs bg-oro bg-opacity-20 text-oro px-2 py-0.5 border border-oro border-opacity-30">Res Premium</span>
+            </div>
+            <span class="font-bebas text-2xl text-crema">690 ₽</span>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <span class="text-xs text-barro">Picante:</span>
+            <div class="flex gap-1">
+              <div class="w-3 h-3 rounded-full bg-barro opacity-60"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+            </div>
+            <span class="text-xs text-barro">Sin picante</span>
+          </div>
+        </div>
+
+        <!-- Taco 4: Pollo -->
+        <div class="menu-card p-6 reveal reveal-delay-1">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span class="text-xs tracking-widest uppercase text-fuego">Introducción · Для начинающих</span>
+              <h3 class="font-bebas text-3xl text-crema mt-1">Orden de tacos de Pollo Adobado (4 tacos)</h3>
+              <p class="font-hand text-oro text-lg">Курица в адобо</p>
+            </div>
+            <span class="text-4xl">🍗</span>
+          </div>
+          <p class="text-barro text-sm leading-relaxed mb-4">
+            Muslo de pollo en adobo de ancho y guajillo tostado, servido desmenuzado. Perfecto punto de entrada para quienes se acercan a la cocina mexicana por primera vez.
+          </p>
+          <p class="font-hand text-barro text-sm italic">
+            Идеальный выбор для тех, кто пробует тако впервые. Мягко и ароматно.
+          </p>
+          <div class="mt-4 pt-4 border-t border-ceniza flex items-center justify-between">
+            <div class="flex gap-1">
+              <span class="text-xs bg-fuego bg-opacity-20 text-fuego px-2 py-0.5 border border-fuego border-opacity-30">Pollo</span>
+            </div>
+            <span class="font-bebas text-2xl text-crema">540 ₽</span>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <span class="text-xs text-barro">Picante:</span>
+            <div class="flex gap-1">
+              <div class="w-3 h-3 rounded-full bg-barro opacity-60"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+            </div>
+            <span class="text-xs text-barro">Sin picante</span>
+          </div>
+        </div>
+
+        <!-- Taco 5: Nopal (Vegetariano) -->
+        <div class="menu-card p-6 reveal reveal-delay-2">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span class="text-xs tracking-widest uppercase text-green-500" style="color:#5B8C5A;">Vegetariano · Веган</span>
+              <h3 class="font-bebas text-3xl text-crema mt-1">Orden de tacos de Nopal (4 tacos)</h3>
+              <p class="font-hand text-oro text-lg">Кактус на гриле 🌵</p>
+            </div>
+            <span class="text-4xl">🌵</span>
+          </div>
+          <p class="text-barro text-sm leading-relaxed mb-4">
+            Nopal (cactus mexicano) asado a la plancha con epazote y queso Oaxaca derretido. Textura y sabor únicos. 
+            <strong class="text-crema">Para Rusia:</strong> es la alternativa vegetariana más exótica y sorprendente del menú.
+          </p>
+          <p class="font-hand text-barro text-sm italic">
+            Мексиканский кактус на гриле с сыром! Удивительно вкусно и полезно.
+          </p>
+          <div class="mt-4 pt-4 border-t border-ceniza flex items-center justify-between">
+            <div class="flex gap-1">
+              <span class="text-xs px-2 py-0.5 border" style="color:#5B8C5A; border-color: rgba(91,140,90,0.4); background: rgba(91,140,90,0.1)">Vegetariano</span>
+            </div>
+            <span class="font-bebas text-2xl text-crema">490 ₽</span>
+          </div>
+          <div class="mt-3 flex items-center gap-2">
+            <span class="text-xs text-barro">Picante:</span>
+            <div class="flex gap-1">
+              <div class="w-3 h-3 rounded-full bg-fuego"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+              <div class="w-3 h-3 rounded-full bg-ceniza"></div>
+            </div>
+            <span class="text-xs text-barro">Suave</span>
+          </div>
+        </div>
+
+        <!-- Tepache Card Especial -->
+        <div class="reveal reveal-delay-3 p-6 relative overflow-hidden border border-oro border-opacity-30"
+             style="background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(232,112,26,0.08));">
+          <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-oro"></div>
+          <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-oro"></div>
+
+          <span class="text-xs tracking-widest uppercase text-oro">Bebida Especial · Специальный Напиток</span>
+          <h3 class="font-bebas text-3xl text-crema mt-2 mb-1">Tepache</h3>
+          <p class="font-hand text-oro text-xl mb-4">Мексиканский Квас из ананаса 🍍</p>
+
+          <div class="tepache-badge p-3 mb-4">
+            <p class="font-hand text-oro text-lg">
+              Tepache = Квас mexicano
+            </p>
+            <p class="text-barro text-xs mt-1">
+              Fermentado · Ligeramente efervescente · Sin alcohol (o con, ¡tú eliges!)
+            </p>
+          </div>
+
+          <p class="text-barro text-sm leading-relaxed mb-4">
+            Piña fermentada con piloncillo (azúcar morena) y canela durante 48 horas. Levemente dulce, refrescante y con una suave efervescencia. <strong class="text-crema">El kvass de México.</strong>
+          </p>
+          <p class="font-hand text-barro text-sm italic">
+            Ферментированный ананасовый напиток — как квас, только тропический. Освежает и помогает пищеварению.
+          </p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xs text-barro">Sin alcohol · Алкогольный вариант: +30₽</span>
+            <span class="font-bebas text-2xl text-oro">290 ₽</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PICANTÓMETRO INTERACTIVO
+  ============================================================ -->
+  <section id="picantometro" class="py-28 px-6 md:px-12 relative overflow-hidden"
+           style="background: linear-gradient(135deg, #120C06 0%, #0A0804 50%, #180A04 100%);">
+
+    <!-- Glow de fondo -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full"
+           style="background: radial-gradient(circle, rgba(196,30,58,0.08) 0%, transparent 70%);"></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto relative z-10">
+
+      <!-- Encabezado -->
+      <div class="text-center mb-16 reveal">
+        <p class="section-tag mb-3">Guía de Salsas · Руководство по Соусам</p>
+        <h2 class="font-bebas text-5xl md:text-7xl text-crema leading-none mb-4">
+          El Picant<span class="text-fuego">ómetro</span>
+        </h2>
+        <p class="font-hand text-oro text-xl">Шкала Остроты — Encuentra tu nivel ideal</p>
+        <p class="text-barro mt-3 max-w-lg mx-auto text-sm leading-relaxed">
+          En México, el picante es un arte. No es para sufrir, es para disfrutar. Elige tu nivel y descubre el maridaje perfecto para tu taco.
+        </p>
+        <div class="oro-divider mx-auto mt-6"></div>
+      </div>
+
+      <!-- Selector de nivel -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12" id="picanto-selector">
+
+        <!-- Nivel 0 -->
+        <button class="picanto-btn active-0 p-5 text-center transition-all"
+                data-level="0" onclick="setPicante(0)">
+          <div class="text-5xl mb-3">💧</div>
+          <p class="font-bebas text-2xl text-crema mb-1">Nivel 0</p>
+          <p class="font-hand text-oro text-lg">Sin Picante</p>
+          <p class="text-xs text-barro mt-2">Без остроты</p>
+          <div class="mt-3 h-1 rounded-full bg-barro opacity-40"></div>
+        </button>
+
+        <!-- Nivel 1 -->
+        <button class="picanto-btn p-5 text-center transition-all"
+                data-level="1" onclick="setPicante(1)">
+          <div class="text-5xl mb-3">🌶️</div>
+          <p class="font-bebas text-2xl text-crema mb-1">Nivel 1</p>
+          <p class="font-hand text-oro text-lg">Suave</p>
+          <p class="text-xs text-barro mt-2">Нежная острота</p>
+          <div class="mt-3 h-1 rounded-full" style="background: var(--oro); opacity:0.7;"></div>
+        </button>
+
+        <!-- Nivel 2 -->
+        <button class="picanto-btn p-5 text-center transition-all"
+                data-level="2" onclick="setPicante(2)">
+          <div class="text-5xl mb-3">🔥</div>
+          <p class="font-bebas text-2xl text-crema mb-1">Nivel 2</p>
+          <p class="font-hand text-oro text-lg">Media</p>
+          <p class="text-xs text-barro mt-2">Средняя острота</p>
+          <div class="mt-3 h-1 rounded-full" style="background: var(--fuego);"></div>
+        </button>
+
+        <!-- Nivel 3 -->
+        <button class="picanto-btn p-5 text-center transition-all"
+                data-level="3" onclick="setPicante(3)">
+          <div class="text-5xl mb-3">💀</div>
+          <p class="font-bebas text-2xl text-crema mb-1">Nivel 3</p>
+          <p class="font-hand text-brasa text-lg">Chocrut</p>
+          <p class="text-xs text-barro mt-2">Огонь! 🔥</p>
+          <div class="mt-3 h-1 rounded-full" style="background: var(--brasa);"></div>
+        </button>
+      </div>
+
+      <!-- Panel de información del nivel -->
+      <div id="picanto-panel" class="border border-ceniza p-8 transition-all duration-500"
+           style="background: linear-gradient(135deg, rgba(42,32,24,0.8), rgba(26,21,16,0.95));">
+        <div class="grid md:grid-cols-3 gap-8 items-start">
+
+          <!-- Salsa recomendada -->
+          <div>
+            <p class="section-tag mb-3">Salsa Recomendada</p>
+            <h3 id="salsa-nombre" class="font-bebas text-3xl text-crema mb-2">Tomatillo Verde</h3>
+            <p id="salsa-desc" class="text-barro text-sm leading-relaxed">
+              Base de tomate verde rostizado, cilantro y limón. Sin chile. Fresca y aromática. Perfecta para tu primer taco.
+            </p>
+            <p id="salsa-ruso" class="font-hand text-oro text-base mt-3">
+              Зелёный томатный соус — свежий и без остроты. Идеально для первого тако.
+            </p>
+          </div>
+
+          <!-- Ingredientes -->
+          <div>
+            <p class="section-tag mb-3">Ingredientes Principales</p>
+            <ul id="salsa-ingredientes" class="space-y-2 text-sm text-barro">
+              <li class="flex items-center gap-2"><span class="text-fuego">→</span> Tomatillo verde rostizado</li>
+              <li class="flex items-center gap-2"><span class="text-fuego">→</span> Cilantro fresco</li>
+              <li class="flex items-center gap-2"><span class="text-fuego">→</span> Ajo asado</li>
+              <li class="flex items-center gap-2"><span class="text-fuego">→</span> Limón mexicano</li>
+            </ul>
+          </div>
+
+          <!-- Consejo -->
+          <div class="border-l border-ceniza pl-6">
+            <p class="section-tag mb-3">Consejo del Taquero</p>
+            <p id="salsa-consejo" class="font-hand text-crema text-lg leading-relaxed">
+              "Empieza aquí. Sin miedo. El sabor de México no necesita picante para conquistarte."
+            </p>
+            <div id="nivel-display" class="mt-4 flex items-center gap-2">
+              <div class="flex gap-1">
+                <div class="w-4 h-4 rounded-full bg-barro opacity-40"></div>
+                <div class="w-4 h-4 rounded-full bg-ceniza"></div>
+                <div class="w-4 h-4 rounded-full bg-ceniza"></div>
+              </div>
+              <span id="nivel-texto" class="text-xs text-barro uppercase tracking-widest">Sin picante</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       LA EXPERIENCIA NOCTURNA
+  ============================================================ -->
+  <section id="experiencia" class="py-28 px-6 md:px-12 relative overflow-hidden">
+
+    <span class="absolute left-0 top-1/2 -translate-y-1/2 font-bebas text-[20rem] leading-none
+                 text-crema opacity-[0.015] select-none pointer-events-none">NOCHE</span>
+
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Encabezado -->
+      <div class="text-center mb-20 reveal">
+        <p class="section-tag mb-3">Ambiente · Атмосфера</p>
+        <h2 class="font-bebas text-5xl md:text-7xl text-crema leading-none mb-4">
+          La Experiencia<br>
+          <span class="text-fuego">Nocturna</span>
+        </h2>
+        <p class="font-hand text-oro text-xl">Ночная Атмосфера — Donde la CDMX se encuentra con Moscú</p>
+        <div class="oro-divider mx-auto mt-6"></div>
+      </div>
+
+      <!-- Pilares de la experiencia -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="reveal text-center p-6 group">
+          <div class="w-16 h-16 mx-auto mb-6 border border-fuego border-opacity-30 flex items-center justify-center text-4xl
+                      group-hover:border-fuego group-hover:bg-fuego group-hover:bg-opacity-10 transition-all">
+            🎷
+          </div>
+          <h3 class="font-bebas text-2xl text-crema mb-3">Música en Vivo</h3>
+          <p class="text-barro text-sm leading-relaxed">
+            Banda de música norteña los fines de semana. Covers de Café Tacvba y Manu Chao para el público internacional.
+          </p>
+          <p class="font-hand text-oro text-sm mt-3">Живая музыка по выходным</p>
+        </div>
+
+        <div class="reveal reveal-delay-1 text-center p-6 group">
+          <div class="w-16 h-16 mx-auto mb-6 border border-fuego border-opacity-30 flex items-center justify-center text-4xl
+                      group-hover:border-fuego group-hover:bg-fuego group-hover:bg-opacity-10 transition-all">
+            🕯️
+          </div>
+          <h3 class="font-bebas text-2xl text-crema mb-3">Diseño de Luz</h3>
+          <p class="text-barro text-sm leading-relaxed">
+            Iluminación cálida de carbón con neón rojo. Azulejos talavera originales importados de Puebla. Ambiente íntimo y cinematográfico.
+          </p>
+          <p class="font-hand text-oro text-sm mt-3">Тёплый свет и мексиканская плитка</p>
+        </div>
+
+        <div class="reveal reveal-delay-2 text-center p-6 group">
+          <div class="w-16 h-16 mx-auto mb-6 border border-fuego border-opacity-30 flex items-center justify-center text-4xl
+                      group-hover:border-fuego group-hover:bg-fuego group-hover:bg-opacity-10 transition-all">
+            🫙
+          </div>
+          <h3 class="font-bebas text-2xl text-crema mb-3">Barra de Bebidas</h3>
+          <p class="text-barro text-sm leading-relaxed">
+            Tepache artesanal, aguas frescas de temporada, michelada de manzana y cócteles de mezcal con frutas rusas de temporada.
+          </p>
+          <p class="font-hand text-oro text-sm mt-3">Авторские напитки из Мексики</p>
+        </div>
+
+        <div class="reveal reveal-delay-3 text-center p-6 group">
+          <div class="w-16 h-16 mx-auto mb-6 border border-fuego border-opacity-30 flex items-center justify-center text-4xl
+                      group-hover:border-fuego group-hover:bg-fuego group-hover:bg-opacity-10 transition-all">
+            🛒
+          </div>
+          <h3 class="font-bebas text-2xl text-crema mb-3">Mercado en Miniatura</h3>
+          <p class="text-barro text-sm leading-relaxed">
+            Rincón de ingredientes mexicanos: chiles secos, chocolate de Oaxaca, café de Veracruz y merch de El Borrego Viudo.
+          </p>
+          <p class="font-hand text-oro text-sm mt-3">Мексиканский мини-рынок</p>
+        </div>
+      </div>
+
+      <!-- Frase de ambiente -->
+      <div class="mt-20 reveal">
+        <div class="border border-ceniza p-10 text-center relative"
+             style="background: linear-gradient(135deg, rgba(42,32,24,0.5), rgba(26,21,16,0.7));">
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-carbon px-6">
+            <span class="section-tag">El Ambiente</span>
+          </div>
+          <p class="font-serif italic text-3xl md:text-4xl text-crema leading-tight mb-6">
+            "Son las 2 de la mañana en la CDMX.<br>
+            <span class="text-fuego">El comal está encendido.</span> El taxista espera.<br>
+            Aquí, lo traemos a Rusia."
+          </p>
+          <p class="font-hand text-oro text-2xl">
+            "Два часа ночи. Комал горит. Мы привезли это в Россию."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       UBICACIÓN Y HORARIOS
+  ============================================================ -->
+  <section id="ubicacion" class="py-28 px-6 md:px-12 relative"
+           style="background: linear-gradient(to bottom, #0A0804, #0F0A05);">
+
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Encabezado -->
+      <div class="text-center mb-16 reveal">
+        <p class="section-tag mb-3">Encuéntranos · Найди нас</p>
+        <h2 class="font-bebas text-5xl md:text-7xl text-crema leading-none mb-4">
+          Dónde y<br>
+          <span class="text-fuego">Cuándo</span>
+        </h2>
+        <div class="oro-divider mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- Moscú -->
+        <div class="location-card p-8 reveal">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 flex items-center justify-center text-3xl">🏙️</div>
+            <div>
+              <p class="font-bebas text-3xl text-crema">Moscú · Москва</p>
+              <p class="text-xs text-barro uppercase tracking-widest">Sucursal Principal · Флагманский филиал</p>
+            </div>
+          </div>
+
+          <!-- Mapa placeholder -->
+          <div class="mb-6 h-44 border border-ceniza flex items-center justify-center relative overflow-hidden"
+               style="background: linear-gradient(135deg, rgba(42,32,24,0.8), rgba(26,21,16,0.95));">
+            <div class="text-center">
+              <div class="text-4xl mb-2">📍</div>
+              <p class="font-bebas text-xl text-crema">Arbat, 28</p>
+              <p class="text-xs text-barro">ул. Арбат, 28 · Москва, Россия</p>
+            </div>
+            <!-- Líneas de cuadrícula decorativas -->
+            <div class="absolute inset-0 opacity-10"
+                 style="background-image: linear-gradient(var(--barro) 1px, transparent 1px),
+                                          linear-gradient(90deg, var(--barro) 1px, transparent 1px);
+                        background-size: 30px 30px;"></div>
+          </div>
+
+          <!-- Horarios -->
+          <div class="space-y-0">
+            <div class="horario-row py-3 px-2 flex justify-between text-sm">
+              <span class="text-barro">Lunes – Jueves · Пн-Чт</span>
+              <span class="text-crema font-medium">17:00 – 01:00</span>
+            </div>
+            <div class="horario-row py-3 px-2 flex justify-between text-sm">
+              <span class="text-barro">Viernes · Пт</span>
+              <span class="text-crema font-medium">17:00 – 03:00</span>
+            </div>
+            <div class="horario-row py-3 px-2 flex justify-between text-sm">
+              <span class="text-fuego font-medium">Sábado · Сб</span>
+              <span class="text-fuego font-semibold">14:00 – 04:00</span>
+            </div>
+            <div class="horario-row py-3 px-2 flex justify-between text-sm">
+              <span class="text-fuego font-medium">Domingo · Вс</span>
+              <span class="text-fuego font-semibold">14:00 – 02:00</span>
+            </div>
+          </div>
+
+          <div class="mt-6 flex gap-3">
+            <a href="tel:+74951234567" class="btn-fuego text-xs flex-1 text-center">
+              <span>📞 Reservar</span>
+            </a>
+            <a href="#" class="btn-outline text-xs flex-1 text-center">
+              Ver en Mapa
+            </a>
+          </div>
+        </div>
+
+        <!-- San Petersburgo -->
+        <div class="location-card p-8 reveal reveal-delay-2">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 flex items-center justify-center text-3xl">🌉</div>
+            <div>
+              <p class="font-bebas text-3xl text-crema">San Petersburgo · СПб</p>
+              <p class="text-xs text-barro uppercase tracking-widest">Próxima Apertura · Скоро Открытие</p>
+            </div>
+          </div>
+
+          <!-- Mapa placeholder -->
+          <div class="mb-6 h-44 border border-ceniza flex items-center justify-center relative overflow-hidden"
+               style="background: linear-gradient(135deg, rgba(42,32,24,0.8), rgba(26,21,16,0.95));">
+            <div class="text-center">
+              <div class="text-4xl mb-2">📍</div>
+              <p class="font-bebas text-xl text-crema">Nevsky, 88</p>
+              <p class="text-xs text-barro">Невский пр., 88 · Санкт-Петербург</p>
+            </div>
+            <div class="absolute inset-0 opacity-10"
+                 style="background-image: linear-gradient(var(--barro) 1px, transparent 1px),
+                                          linear-gradient(90deg, var(--barro) 1px, transparent 1px);
+                        background-size: 30px 30px;"></div>
+            <!-- Próximamente overlay -->
+            <div class="absolute inset-0 flex items-center justify-center"
+                 style="background: rgba(10,8,4,0.5);">
+              <div class="border border-oro border-opacity-50 px-6 py-3 bg-carbon bg-opacity-80">
+                <p class="font-bebas text-xl text-oro">Apertura Q2 2026</p>
+                <p class="font-hand text-barro text-sm text-center">Скоро открытие!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Horarios próximamente -->
+          <div class="space-y-0">
+            <div class="horario-row py-3 px-2 flex justify-between text-sm">
+              <span class="text-barro">Martes – Jueves · Вт-Чт</span>
+              <span class="text-ceniza font-medium">18:00 – 01:00</span>
+            </div>
+            <div class="horario-row py-3 px-2 flex justify-between text-sm">
+              <span class="text-barro">Viernes · Пт</span>
+              <span class="text-ceniza font-medium">17:00 – 03:00</span>
+            </div>
+            <div class="horario-row py-3 px-2 flex justify-between text-sm">
+              <span class="text-barro">Sábado · Сб</span>
+              <span class="text-ceniza font-semibold">14:00 – 04:00</span>
+            </div>
+            <div class="horario-row py-3 px-2 flex justify-between text-sm">
+              <span class="text-barro">Domingo · Вс</span>
+              <span class="text-ceniza font-semibold">14:00 – 02:00</span>
+            </div>
+          </div>
+
+          <!-- Notificación -->
+          <div class="mt-6 p-4 border border-oro border-opacity-30 text-center"
+               style="background: rgba(212,175,55,0.05);">
+            <p class="font-hand text-oro text-lg">¡Sé el primero en enterarte!</p>
+            <p class="text-xs text-barro mb-3">Будь первым, кто узнает об открытии</p>
+            <div class="flex gap-2">
+              <input type="email" placeholder="tu@email.com"
+                     class="flex-1 bg-carbon border border-ceniza px-3 py-2 text-sm text-crema
+                            placeholder-barro focus:outline-none focus:border-fuego transition-colors"
+                     style="font-family: Manrope, sans-serif;">
+              <button class="btn-fuego px-4 py-2 text-xs"><span>OK</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FRANQUICIAS E INVERSIÓN
+  ============================================================ -->
+  <section id="franquicias" class="py-28 px-6 md:px-12 relative overflow-hidden">
+
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full opacity-5"
+           style="background: radial-gradient(circle, var(--oro), transparent);"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+
+      <!-- Encabezado -->
+      <div class="text-center mb-16 reveal">
+        <p class="section-tag mb-3">Franquicias · Франшиза</p>
+        <h2 class="font-bebas text-5xl md:text-7xl text-crema leading-none mb-4">
+          Invierte en el<br>
+          <span class="text-oro">Futuro del Sabor</span>
+        </h2>
+        <p class="text-barro max-w-xl mx-auto leading-relaxed">
+          Рынок мексиканской уличной еды в России — нетронутая территория. Будь первым. Инвестируй умно.
+        </p>
+        <div class="oro-divider mx-auto mt-6"></div>
+      </div>
+
+      <!-- Paquetes de Inversión -->
+      <div class="grid md:grid-cols-3 gap-6 mb-16">
+
+        <!-- Paquete Básico -->
+        <div class="invest-card p-8 reveal">
+          <div class="text-center mb-6">
+            <span class="text-xs tracking-widest uppercase text-barro">Paquete · Пакет</span>
+            <h3 class="font-bebas text-4xl text-crema mt-2">Taquero</h3>
+            <div class="oro-divider mx-auto my-4"></div>
+            <p class="font-bebas text-5xl text-fuego">€80K</p>
+            <p class="text-xs text-barro mt-1">Inversión inicial · Начальные инвестиции</p>
+          </div>
+          <ul class="space-y-3 text-sm text-barro mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-fuego mt-0.5">✓</span>
+              <span>Licencia de marca El Borrego Viudo · Лицензия бренда</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-fuego mt-0.5">✓</span>
+              <span>Capacitación de 4 semanas en CDMX · Обучение в Мехико</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-fuego mt-0.5">✓</span>
+              <span>Kit de inicio: comal, utensilios, recetas maestras</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-fuego mt-0.5">✓</span>
+              <span>Soporte digital y cadena de suministro de ingredientes</span>
+            </li>
+          </ul>
+          <a href="mailto:franquicias@borreguviudo.ru" class="btn-outline w-full text-center block">
+            Contactar
+          </a>
+        </div>
+
+        <!-- Paquete Medio - Destacado -->
+        <div class="invest-card p-8 reveal reveal-delay-1 relative"
+             style="border-color: var(--oro); background: linear-gradient(135deg, rgba(42,32,24,0.95), rgba(26,21,16,0.98));">
+          <!-- Etiqueta recomendado -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-oro text-carbon font-body font-bold
+                      text-xs px-4 py-1 tracking-widest uppercase whitespace-nowrap">
+            Más Popular · Самый Популярный
+          </div>
+          <div class="text-center mb-6">
+            <span class="text-xs tracking-widest uppercase text-oro">Paquete · Пакет</span>
+            <h3 class="font-bebas text-4xl text-crema mt-2">Borrego</h3>
+            <div class="oro-divider mx-auto my-4"></div>
+            <p class="font-bebas text-5xl text-oro">€180K</p>
+            <p class="text-xs text-barro mt-1">Inversión inicial · Начальные инвестиции</p>
+          </div>
+          <ul class="space-y-3 text-sm text-barro mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-oro mt-0.5">✓</span>
+              <span>Todo del paquete Taquero</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-oro mt-0.5">✓</span>
+              <span>Diseño de local completo con identidad visual oficial</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-oro mt-0.5">✓</span>
+              <span>Carta de menú tropicalizada adaptada a tu ciudad rusa</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-oro mt-0.5">✓</span>
+              <span>Consultor de apertura presente los primeros 60 días</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-oro mt-0.5">✓</span>
+              <span>Acceso a plataforma de gestión y pedidos en línea</span>
+            </li>
+          </ul>
+          <a href="mailto:franquicias@borreguviudo.ru" class="btn-fuego w-full text-center block">
+            <span>Solicitar Info</span>
+          </a>
+        </div>
+
+        <!-- Paquete Premium -->
+        <div class="invest-card p-8 reveal reveal-delay-2">
+          <div class="text-center mb-6">
+            <span class="text-xs tracking-widest uppercase text-barro">Paquete · Пакет</span>
+            <h3 class="font-bebas text-4xl text-crema mt-2">El Patrón</h3>
+            <div class="oro-divider mx-auto my-4"></div>
+            <p class="font-bebas text-5xl" style="color: var(--brasa);">€380K</p>
+            <p class="text-xs text-barro mt-1">Master Franquicia · Мастер-Франшиза</p>
+          </div>
+          <ul class="space-y-3 text-sm text-barro mb-8">
+            <li class="flex items-start gap-3">
+              <span style="color:var(--brasa);" class="mt-0.5">✓</span>
+              <span>Derechos exclusivos por ciudad o región de Rusia</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span style="color:var(--brasa);" class="mt-0.5">✓</span>
+              <span>Subfranquicia: vende tus propias sub-licencias</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span style="color:var(--brasa);" class="mt-0.5">✓</span>
+              <span>Cocina central comisariada incluida en el diseño</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span style="color:var(--brasa);" class="mt-0.5">✓</span>
+              <span>Asesoría jurídica y fiscal México–Rusia incluida</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span style="color:var(--brasa);" class="mt-0.5">✓</span>
+              <span>Apoyo en importación de ingredientes clave: chiles, achiote, epazote</span>
+            </li>
+          </ul>
+          <a href="mailto:franquicias@borreguviudo.ru" class="btn-outline w-full text-center block"
+             style="border-color: var(--brasa); color: var(--brasa);">
+            Invertir Ahora
+          </a>
+        </div>
+      </div>
+
+      <!-- FAQ Accordion -->
+      <div class="max-w-3xl mx-auto reveal">
+        <h3 class="font-bebas text-3xl text-crema text-center mb-8">Preguntas Frecuentes · Часто Задаваемые Вопросы</h3>
+        <div class="space-y-2" id="faq">
+
+          <div class="border border-ceniza">
+            <button class="accordion-btn w-full px-6 py-4 flex items-center justify-between text-left"
+                    onclick="toggleAccordion(this)">
+              <span class="font-bebas text-xl text-crema">¿Puedo abrir en cualquier ciudad de Rusia?</span>
+              <svg class="accordion-arrow w-5 h-5 text-fuego flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="text-barro text-sm leading-relaxed pb-4">
+                Con los paquetes Taquero y Borrego, puedes abrir en cualquier ciudad rusa. El paquete El Patrón te da derechos exclusivos de zona. Tenemos socios actuales evaluando Ekaterimburgo, Novosibirsk y Kazán.
+              </p>
+            </div>
+          </div>
+
+          <div class="border border-ceniza">
+            <button class="accordion-btn w-full px-6 py-4 flex items-center justify-between text-left"
+                    onclick="toggleAccordion(this)">
+              <span class="font-bebas text-xl text-crema">¿Cómo se importan los ingredientes a Rusia?</span>
+              <svg class="accordion-arrow w-5 h-5 text-fuego flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="text-barro text-sm leading-relaxed pb-4">
+                Trabajamos con un operador logístico especializado México–Rusia. Los chiles secos, achiote y epazote llegan en lotes mensuales. Los ingredientes frescos (cilantro, limón) se adquieren localmente siguiendo nuestras guías de proveedores aprobados.
+              </p>
+            </div>
+          </div>
+
+          <div class="border border-ceniza">
+            <button class="accordion-btn w-full px-6 py-4 flex items-center justify-between text-left"
+                    onclick="toggleAccordion(this)">
+              <span class="font-bebas text-xl text-crema">¿Cuánto tiempo tarda en recuperarse la inversión?</span>
+              <svg class="accordion-arrow w-5 h-5 text-fuego flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="text-barro text-sm leading-relaxed pb-4">
+                Nuestras proyecciones para el mercado ruso estiman un ROI en 18–30 meses para locales en zonas prime de Moscú y San Petersburgo, con un ticket promedio de 1,200–1,800 ₽ por persona. Compartimos nuestro modelo financiero detallado tras firma de NDA.
+              </p>
+            </div>
+          </div>
+
+          <div class="border border-ceniza">
+            <button class="accordion-btn w-full px-6 py-4 flex items-center justify-between text-left"
+                    onclick="toggleAccordion(this)">
+              <span class="font-bebas text-xl text-crema">¿Necesito hablar español?</span>
+              <svg class="accordion-arrow w-5 h-5 text-fuego flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="accordion-content px-6">
+              <p class="text-barro text-sm leading-relaxed pb-4">
+                No. Todo el material de capacitación, manuales operativos y soporte está disponible en ruso e inglés. Nuestro equipo en Moscú coordina toda la comunicación. El chef formador habla ruso fluido.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10">
+          <a href="mailto:invest@borreguviudo.ru" class="btn-fuego">
+            <span>📩 Solicitar Presentación Completa</span>
+          </a>
+          <p class="text-xs text-barro mt-4">invest@borreguviudo.ru · Respuesta en menos de 48h</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="py-16 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Top Footer -->
+      <div class="grid md:grid-cols-4 gap-10 mb-12 pb-12 border-b border-ceniza">
+
+        <!-- Brand -->
+        <div class="md:col-span-2">
+          <p class="font-bebas text-4xl text-crema tracking-widest mb-2">El Borrego Viudo</p>
+          <p class="font-hand text-oro text-xl mb-4">Tacos de la CDMX — Москва · Санкт-Петербург</p>
+          <p class="text-barro text-sm leading-relaxed max-w-xs">
+            Traemos el alma de la taquería callejera mexicana a Rusia, con respeto, amor y mucho sabor. Sin compromisos. Sin fusiones forzadas. Solo tacos de verdad.
+          </p>
+          <p class="font-hand text-barro text-sm mt-3">
+            Мы привозим душу мексиканской уличной таккерии в Россию. Без компромиссов. Только настоящие тако.
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="font-bebas text-lg text-crema tracking-widest mb-4">Navegación</h4>
+          <ul class="space-y-2">
+            <li><a href="#historia"    class="nav-link text-barro">Nuestra Historia</a></li>
+            <li><a href="#menu"        class="nav-link text-barro">Menú Adaptado</a></li>
+            <li><a href="#como-comer"  class="nav-link text-barro">¿Cómo comer un taco?</a></li>
+            <li><a href="#experiencia" class="nav-link text-barro">La Experiencia</a></li>
+            <li><a href="#ubicacion"   class="nav-link text-barro">Ubicación</a></li>
+            <li><a href="#franquicias" class="nav-link text-barro">Franquicias</a></li>
+          </ul>
+        </div>
+
+        <!-- Contacto -->
+        <div>
+          <h4 class="font-bebas text-lg text-crema tracking-widest mb-4">Contacto · Контакты</h4>
+          <ul class="space-y-3 text-sm text-barro">
+            <li>
+              <span class="text-fuego block text-xs uppercase tracking-widest mb-1">Moscú</span>
+              <a href="tel:+74951234567" class="hover:text-crema transition-colors">+7 (495) 123-45-67</a>
+            </li>
+            <li>
+              <span class="text-fuego block text-xs uppercase tracking-widest mb-1">Email</span>
+              <a href="mailto:hola@borreguviudo.ru" class="hover:text-crema transition-colors">hola@borreguviudo.ru</a>
+            </li>
+            <li>
+              <span class="text-fuego block text-xs uppercase tracking-widest mb-1">Franquicias</span>
+              <a href="mailto:invest@borreguviudo.ru" class="hover:text-crema transition-colors">invest@borreguviudo.ru</a>
+            </li>
+            <li>
+              <span class="text-fuego block text-xs uppercase tracking-widest mb-1">Redes Sociales</span>
+              <div class="flex gap-3 mt-1">
+                <a href="#" class="text-barro hover:text-fuego transition-colors text-lg">📸</a>
+                <a href="#" class="text-barro hover:text-fuego transition-colors text-lg">🎵</a>
+                <a href="#" class="text-barro hover:text-fuego transition-colors text-lg">✈️</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Footer -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-barro">
+        <p>© 2025 El Borrego Viudo. Todos los derechos reservados · Все права защищены.</p>
+        <div class="deco-line hidden md:flex w-48">
+          <span class="font-hand text-fuego whitespace-nowrap">Con amor desde la CDMX 🌮</span>
+        </div>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-crema transition-colors">Aviso de Privacidad</a>
+          <span>·</span>
+          <a href="#" class="hover:text-crema transition-colors">Términos</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ── Generar estrellitas de fondo ──────────────────────────
+    (function generateStars() {
+      const field = document.getElementById('star-field');
+      if (!field) return;
+      const count = window.innerWidth < 640 ? 40 : 80;
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.cssText = `
+          top: ${Math.random() * 60}%;
+          left: ${Math.random() * 100}%;
+          --d: ${3 + Math.random() * 4}s;
+          --del: ${Math.random() * 3}s;
+          opacity: ${0.2 + Math.random() * 0.6};
+          width: ${1 + Math.random() * 2}px;
+          height: ${1 + Math.random() * 2}px;
+        `;
+        field.appendChild(star);
+      }
+    })();
+
+    // ── Navbar scroll ─────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // ── Mobile Menu ───────────────────────────────────────────
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    let menuOpen = false;
+
+    menuToggle.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('hidden', !menuOpen);
+      // Animación hamburger → X
+      if (menuOpen) {
+        bar1.style.transform = 'translateY(8px) rotate(45deg)';
+        bar2.style.opacity   = '0';
+        bar3.style.transform = 'translateY(-8px) rotate(-45deg)';
+        bar3.style.width     = '24px';
+      } else {
+        bar1.style.transform = '';
+        bar2.style.opacity   = '1';
+        bar3.style.transform = '';
+        bar3.style.width     = '16px';
+      }
+    });
+
+    function closeMobileMenu() {
+      menuOpen = false;
+      mobileMenu.classList.add('hidden');
+      bar1.style.transform = '';
+      bar2.style.opacity   = '1';
+      bar3.style.transform = '';
+      bar3.style.width     = '16px';
+    }
+
+    // ── Reveal on Scroll ──────────────────────────────────────
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ── Cómo comer un taco — Pasos ────────────────────────────
+    const stepData = {
+      1: {
+        icon:  '🤲',
+        title: 'Toma con ambas manos',
+        desc:  'Sostén la tortilla como un pequeño libro abierto. Sin cubiertos, siempre. ¡Es parte de la experiencia callejera!'
+      },
+      2: {
+        icon:  '🌶️',
+        title: 'Añade tu salsa ideal',
+        desc:  'Consulta el Picantómetro aquí abajo y elige tu nivel. Para principiantes: salsa verde tomatillo, sin picante.'
+      },
+      3: {
+        icon:  '🧅',
+        title: 'Cilantro y cebollita',
+        desc:  'Una cucharadita de cada uno. Son los guardianes del sabor. No los omitas. El cilantro es la firma del taco auténtico.'
+      },
+      4: {
+        icon:  '😋',
+        title: '¡Inclínate y muerde!',
+        desc:  'Inclina el taco 45° hacia tu boca. Es normal que caiga algo. Para eso está el papel. ¡El primer mordisco es el más importante!'
+      },
+      5: {
+        icon:  '🍍',
+        title: 'Bebe tu Tepache',
+        desc:  'El tepache frío es el maridaje perfecto. Como un kvass tropical de piña. Refresca, equilibra y ayuda a la digestión.'
+      }
+    };
+
+    function selectStep(num) {
+      // Actualizar clases de pasos
+      document.querySelectorAll('.taco-step').forEach(s => s.classList.remove('active'));
+      const activeStep = document.querySelector(`[data-step="${num}"]`);
+      if (activeStep) activeStep.classList.add('active');
+
+      // Actualizar visualización
+      const data = stepData[num];
+      if (!data) return;
+
+      const iconEl    = document.getElementById('step-icon');
+      const titleEl   = document.getElementById('step-title');
+      const descEl    = document.getElementById('step-desc');
+      const counterEl = document.getElementById('step-counter');
+
+      // Animación de transición
+      iconEl.style.transform = 'scale(0.5)';
+      iconEl.style.opacity   = '0';
+      setTimeout(() => {
+        iconEl.textContent   = data.icon;
+        titleEl.textContent  = data.title;
+        descEl.textContent   = data.desc;
+        counterEl.textContent = `0${num} / 05`;
+        iconEl.style.transform = 'scale(1)';
+        iconEl.style.opacity   = '1';
+      }, 200);
+    }
+
+    // Inicializar paso 1
+    selectStep(1);
+
+    // ── Picantómetro ──────────────────────────────────────────
+    const picanteData = {
+      0: {
+        nombre:       'Tomatillo Verde',
+        desc:         'Base de tomate verde rostizado, cilantro y limón. Sin ningún tipo de chile. Fresca y aromática. Perfecta para tu primer taco.',
+        ruso:         'Зелёный томатный соус — свежий и без остроты. Идеально для первого тако.',
+        ingredientes: ['Tomatillo verde rostizado', 'Cilantro fresco', 'Ajo asado', 'Limón mexicano'],
+        consejo:      '"Empieza aquí. Sin miedo. El sabor de México no necesita picante para conquistarte."',
+        dots:         [false, false, false],
+        texto:        'Sin picante · Без остроты'
+      },
+      1: {
+        nombre:       'Salsa de Guajillo Suave',
+        desc:         'Chile guajillo tostado, ligeramente dulce y ahumado. Muy poco picante. Aromático y de color rojizo intenso. El favorito de los nuevos comensales.',
+        ruso:         'Гуахильо чили — слегка сладкий и копчёный. Очень небольшая острота. Рекомендуем для начала!',
+        ingredientes: ['Chile guajillo tostado', 'Jitomate rostizado', 'Ajo', 'Cebolla blanca'],
+        consejo:      '"El guajillo es el chile más amable de México. Ahumado, dulce, con apenas un suspiro de picante."',
+        dots:         [true, false, false],
+        texto:        'Suave · Нежная острота'
+      },
+      2: {
+        nombre:       'Salsa Taquera Roja',
+        desc:         'Mezcla de chile morita y árbol. Picante media-baja pero con carácter. La salsa clásica de cualquier taquería de la CDMX. Para los valientes.',
+        ruso:         'Красный соус тако — среднеострый. Настоящая мексиканская классика для смелых!',
+        ingredientes: ['Chile morita ahumado', 'Chile de árbol', 'Jitomate', 'Cebolla tatemada'],
+        consejo:      '"Esta es la salsa de los que ya se enamoraron del taco. Bienvenido al nivel siguiente."',
+        dots:         [true, true, false],
+        texto:        'Media · Средняя острота'
+      },
+      3: {
+        nombre:       'Salsa Borrego Viudo 🔥',
+        desc:         '¡ADVERTENCIA! Chile habanero, serrano y ajo negro fermentado. Para paladares entrenados ÚNICAMENTE. No responsabilidad del restaurante después del tercer mordisco.',
+        ruso:         '⚠️ ВНИМАНИЕ! Острый хабанеро и серрано. Только для опытных. После третьего укуса — сам виноват!',
+        ingredientes: ['Chile habanero', 'Chile serrano', 'Ajo negro fermentado', 'Vinagre de caña'],
+        consejo:      '"Esta salsa tiene nombre propio. No la subestimes. Ni siquiera el taquero la usa todos los días."',
+        dots:         [true, true, true],
+        texto:        '¡Fuego! · Огонь! 🔥'
+      }
+    };
+
+    let currentLevel = 0;
+
+    function setPicante(level) {
+      currentLevel = level;
+
+      // Actualizar botones
+      document.querySelectorAll('.picanto-btn').forEach((btn, i) => {
+        btn.className = `picanto-btn p-5 text-center transition-all`;
+        if (i === level) {
+          btn.classList.add(`active-${level}`);
+          btn.style.transform = 'scale(1.03)';
+        } else {
+          btn.style.transform = '';
+        }
+      });
+
+      // Actualizar panel
+      const data  = picanteData[level];
+      const panel = document.getElementById('picanto-panel');
+
+      // Transición suave
+      panel.style.opacity = '0';
+      panel.style.transform = 'translateY(5px)';
+
+      setTimeout(() => {
+        document.getElementById('salsa-nombre').textContent       = data.nombre;
+        document.getElementById('salsa-desc').textContent         = data.desc;
+        document.getElementById('salsa-ruso').textContent         = data.ruso;
+        document.getElementById('salsa-consejo').textContent      = data.consejo;
+        document.getElementById('nivel-texto').textContent        = data.texto;
+
+        // Actualizar ingredientes
+        const list = document.getElementById('salsa-ingredientes');
+        list.innerHTML = data.ingredientes.map(ing =>
+          `<li class="flex items-center gap-2"><span style="color:var(--fuego)">→</span> ${ing}</li>`
+        ).join('');
+
+        // Actualizar dots
+        const dotsContainer = document.getElementById('nivel-display');
+        const dotColors = ['rgba(139,115,85,0.6)', 'var(--oro)', 'var(--fuego)'];
+        const activeColor = level === 3 ? 'var(--brasa)' : 'var(--fuego)';
+        let dotsHTML = '<div class="flex gap-1">';
+        for (let i = 0; i < 3; i++) {
+          const filled = data.dots[i];
+          let color = filled ? (i === 0 ? dotColors[0] : i === 1 ? dotColors[1] : dotColors[2]) : 'var(--ceniza)';
+          if (level === 3 && filled) color = 'var(--brasa)';
+          dotsHTML += `<div class="w-4 h-4 rounded-full" style="background: ${color};"></div>`;
+        }
+        dotsHTML += `</div><span id="nivel-texto" class="text-xs text-barro uppercase tracking-widest">${data.texto}</span>`;
+        dotsContainer.innerHTML = dotsHTML;
+
+        // Actualizar color del borde del panel según nivel
+        const borderColors = ['rgba(139,115,85,0.3)', 'rgba(212,175,55,0.3)', 'rgba(232,112,26,0.4)', 'rgba(196,30,58,0.5)'];
+        panel.style.borderColor = borderColors[level] || borderColors[0];
+
+        panel.style.opacity   = '1';
+        panel.style.transform = 'translateY(0)';
+      }, 200);
+
+      panel.style.transition = 'opacity 0.3s ease, transform 0.3s ease, border-color 0.5s ease';
+    }
+
+    // Inicializar picantómetro
+    setPicante(0);
+
+    // ── FAQ Accordion ─────────────────────────────────────────
+    function toggleAccordion(btn) {
+      const content = btn.nextElementSibling;
+      const arrow   = btn.querySelector('.accordion-arrow');
+      const isOpen  = content.classList.contains('open');
+
+      // Cerrar todos
+      document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+      document.querySelectorAll('.accordion-arrow').forEach(a => a.classList.remove('open'));
+
+      // Abrir el actual si estaba cerrado
+      if (!isOpen) {
+        content.classList.add('open');
+        arrow.classList.add('open');
+      }
+    }
+
+    // ── Email capture (demo) ──────────────────────────────────
+    document.querySelectorAll('input[type="email"]').forEach(input => {
+      const btn = input.nextElementSibling;
+      if (btn) {
+        btn.addEventListener('click', () => {
+          if (input.value && input.value.includes('@')) {
+            btn.innerHTML = '<span>✓</span>';
+            btn.style.background = '#5B8C5A';
+            input.value = '¡Registrado!';
+            input.disabled = true;
+          } else {
+            input.style.borderColor = 'var(--brasa)';
+            setTimeout(() => { input.style.borderColor = ''; }, 2000);
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
